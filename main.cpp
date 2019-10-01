@@ -3,28 +3,50 @@
 //! @mainpage
 //!
 //! - main.c
-
+ 
 #include <stdio.h>
 #include <math.h>
 #include <assert.h>
-
+ 
 #define NOROOTS -1
 #define INF 8
-//! int ComparisonTo0(a, b , accuracity)
+//! char ComparisonTo0(a, b , accuracity)
 //! \param[in] a
 //! \param[in] b
 //! \param[in] accuracity
 //! \return accuracity
-
+ 
 const double accuracity = 0.0001;
-
+const int POISON = 408227;
+ 
 char Comparison(double a, double b, double accuracity){
     if (fabs (a-b) < accuracity)
         return 1;
     return 0;
-
+ 
 }
-
+ 
+//! int InputNumbers(a, b, c)
+//! \param[in] a - A * x^2, address of A
+//! \param[in] b - B * x, address of B
+//! \param[in] c - C, adress of C
+//! \return
+//! \Note :
+ 
+int InputNumbers(double *a, double *b, double *c){
+    for (int i = 0; i <50; i++) {
+        printf("Enter 3 coefficients\n");
+        if (scanf("%lg %lg %lg", &*a, &*b, &*c) == 3) {
+            break;
+        }
+        printf("Incorrect data\n");
+        fflush(stdin);
+    }
+ 
+    return 1;
+}
+ 
+ 
 //! int Solution (double a, double b, double c, double* x1, double* x2)
 //!
 //! \param[in] a - A * x^2
@@ -34,7 +56,7 @@ char Comparison(double a, double b, double accuracity){
 //! \param[out] x2 - root #2
 //! \return - num of roots
 //! \Note : return 8 - infinity, return -1 - 0 roots, return 1 - 1 root, return 2 - 2 roots
-
+ 
 int Solution (double a, double b, double c, double* x1, double* x2) {
     assert (x1 != NULL);
     assert (x2 != NULL);
@@ -42,8 +64,10 @@ int Solution (double a, double b, double c, double* x1, double* x2) {
     assert(isfinite(a));
     assert(isfinite(b));
     assert(isfinite(c));
-
-
+    assert(a != POISON);
+    assert(b != POISON);
+    assert(c != POISON);
+ 
     if (Comparison(a,0,accuracity)) {
         if (Comparison(b,0,accuracity)) {
             if (Comparison(c,0,accuracity)) {
@@ -73,28 +97,28 @@ int Solution (double a, double b, double c, double* x1, double* x2) {
         }
     }
 }
-
+ 
 //! main()
 //! Solution  of quadratic equation
 //! Gain 3 koef. of equation : A, B, C
 //! Give out number of roots and their value
-
+ 
 int main(){
-    double a = 0, b = 0, c = 0;
-    double x1;
-    double x2;
-    int result;
-
-
-    scanf("%lg %lg %lg", &a, &b, &c);
-
+    double a = POISON, b = POISON, c = POISON;
+    double x1 = POISON;
+    double x2 = POISON;
+    int result = POISON;
+ 
+    InputNumbers( &a, &b, &c);
+ 
     result = Solution(a, b, c, &x1, &x2);
+ 
     switch (result){
         case INF:
-            printf("infinity");
+            printf("Infinity");
             break;
         case NOROOTS:
-            printf("nope");
+            printf("No roots");
             break;
         case 1:
             printf("x = %lg", x1);
