@@ -8,9 +8,9 @@
 #include <math.h>
 #include <assert.h>
 
-const int noroots = -1;
-const int inf = 8;
-const double accuracity = 0.0001;
+const int NOROOTS = -1;
+const int INF = 8;
+const double ACCURACITY = 0.0001;
 const int POISON = 408227;
 
 //! char ComparisonTo0(a, b , accuracity)
@@ -19,8 +19,8 @@ const int POISON = 408227;
 //! \param[in] accuracity
 //! \return accuracity
 
-char Comparison(double a, double b, double accuracity){
-    if (fabs (a-b) < accuracity)
+char Comparison(double a, double b, double ACCURACITY){
+    if (fabs (a-b) < ACCURACITY)
         return 1;
     return 0;
 }
@@ -83,12 +83,12 @@ int Solution (double a, double b, double c, double* x1, double* x2) {
     assert(b != POISON);
     assert(c != POISON);
 
-    if (Comparison(a,0,accuracity)) {
-        if (Comparison(b,0,accuracity)) {
-            if (Comparison(c,0,accuracity)) {
-                return inf;
+    if (Comparison(a,0,ACCURACITY)) {
+        if (Comparison(b,0,ACCURACITY)) {
+            if (Comparison(c,0,ACCURACITY)) {
+                return INF;
             } else {
-                return noroots;
+                return NOROOTS;
             }
         } else {
             *x1 = -b / (2 * a);
@@ -98,10 +98,10 @@ int Solution (double a, double b, double c, double* x1, double* x2) {
         double d;
         d = (b * b - 4 * a * c);
         if (d < 0) {
-            return noroots;
+            return NOROOTS;
         } else {
             d = sqrt(d);
-            if ( Comparison(d,0,accuracity)) {
+            if ( Comparison(d,0,ACCURACITY)) {
                 if (b == 0){
                     *x1 = 0;
                 }
@@ -131,10 +131,10 @@ int main(){
     InputNumbers( &a, &b, &c);
     result = Solution(a, b, c, &x1, &x2);
     switch (result){
-        case inf:
+        case INF:
             printf("Infinity");
             break;
-        case noroots:
+        case NOROOTS:
             printf("No roots");
             break;
         case 1:
