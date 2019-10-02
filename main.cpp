@@ -34,8 +34,7 @@ char Comparison(double a, double b, double accuracity){
 //! \Note :
 
 int InputNumbers(double *a, double *b, double *c){
-    int right = 0;
-    double ans[3] ={0};
+    
     for (int i = 0; i <100; i++) {
 
         if(*a == POISON) {
