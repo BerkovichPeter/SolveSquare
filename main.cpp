@@ -85,7 +85,7 @@ int Solution (double a, double b, double c, double* x1, double* x2) {
 
     if (Comparison(a, 0, ACCURACITY)) {
         if (Comparison(b, 0, ACCURACITY)) {
-            if (Comparison(c ,0 , ACCURACITY)) {
+            if (Comparison(c , 0, ACCURACITY)) {
                 return INF;
             } else {
                 return NOROOTS;
