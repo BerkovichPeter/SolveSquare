@@ -8,22 +8,21 @@
 #include <math.h>
 #include <assert.h>
 
-#define NOROOTS -1
-#define INF 8
+const int noroots = -1;
+const int inf = 8;
+const double accuracity = 0.0001;
+const int POISON = 408227;
+
 //! char ComparisonTo0(a, b , accuracity)
 //! \param[in] a
 //! \param[in] b
 //! \param[in] accuracity
 //! \return accuracity
 
-const double accuracity = 0.0001;
-const int POISON = 408227;
-
 char Comparison(double a, double b, double accuracity){
     if (fabs (a-b) < accuracity)
         return 1;
     return 0;
-
 }
 
 //! int InputNumbers(a, b, c)
@@ -34,9 +33,7 @@ char Comparison(double a, double b, double accuracity){
 //! \Note :
 
 int InputNumbers(double *a, double *b, double *c){
-    
     for (int i = 0; i <100; i++) {
-
         if(*a == POISON) {
             printf("Enter A coefficient\n");
             if (!scanf("%lg", &*a)) {
@@ -48,7 +45,6 @@ int InputNumbers(double *a, double *b, double *c){
         if(*b == POISON) {
             printf("Enter B coefficient\n");
             if (!scanf("%lg", &*b)) {
-
                 printf("Wrong input!\n");
                 fflush(stdin);
                 continue;
@@ -63,10 +59,8 @@ int InputNumbers(double *a, double *b, double *c){
             }
         }
     }
-
     return 1;
 }
-
 
 //! int Solution (double a, double b, double c, double* x1, double* x2)
 //!
@@ -92,9 +86,9 @@ int Solution (double a, double b, double c, double* x1, double* x2) {
     if (Comparison(a,0,accuracity)) {
         if (Comparison(b,0,accuracity)) {
             if (Comparison(c,0,accuracity)) {
-                return INF;
+                return inf;
             } else {
-                return NOROOTS;
+                return noroots;
             }
         } else {
             *x1 = -b / (2 * a);
@@ -104,7 +98,7 @@ int Solution (double a, double b, double c, double* x1, double* x2) {
         double d;
         d = (b * b - 4 * a * c);
         if (d < 0) {
-            return NOROOTS;
+            return noroots;
         } else {
             d = sqrt(d);
             if ( Comparison(d,0,accuracity)) {
@@ -135,14 +129,12 @@ int main(){
     int result = POISON;
 
     InputNumbers( &a, &b, &c);
-
     result = Solution(a, b, c, &x1, &x2);
-
     switch (result){
-        case INF:
+        case inf:
             printf("Infinity");
             break;
-        case NOROOTS:
+        case noroots:
             printf("No roots");
             break;
         case 1:
