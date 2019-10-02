@@ -36,7 +36,7 @@ int InputNumbers(double *a, double *b, double *c){
     for (int i = 0; i <100; i++) {
         if(*a == POISON) {
             printf("Enter A coefficient\n");
-            if (!scanf("%lg", &*a)) {
+            if (!scanf("%lg", a)) {
                 printf("Wrong input!\n");
                 fflush(stdin);
                 continue;
@@ -44,7 +44,7 @@ int InputNumbers(double *a, double *b, double *c){
         }
         if(*b == POISON) {
             printf("Enter B coefficient\n");
-            if (!scanf("%lg", &*b)) {
+            if (!scanf("%lg", b)) {
                 printf("Wrong input!\n");
                 fflush(stdin);
                 continue;
@@ -52,7 +52,7 @@ int InputNumbers(double *a, double *b, double *c){
         }
         if(*c == POISON) {
             printf("Enter C coefficient\n");
-            if (!scanf("%lg", &*c)) {
+            if (!scanf("%lg", c)) {
                 printf("Wrong input!\n");
                 fflush(stdin);
                 continue;
@@ -83,9 +83,9 @@ int Solution (double a, double b, double c, double* x1, double* x2) {
     assert(b != POISON);
     assert(c != POISON);
 
-    if (Comparison(a,0,ACCURACITY)) {
-        if (Comparison(b,0,ACCURACITY)) {
-            if (Comparison(c,0,ACCURACITY)) {
+    if (Comparison(a, 0, ACCURACITY)) {
+        if (Comparison(b, 0, ACCURACITY)) {
+            if (Comparison(c ,0 , ACCURACITY)) {
                 return INF;
             } else {
                 return NOROOTS;
@@ -101,7 +101,7 @@ int Solution (double a, double b, double c, double* x1, double* x2) {
             return NOROOTS;
         } else {
             d = sqrt(d);
-            if ( Comparison(d,0,ACCURACITY)) {
+            if ( Comparison(d, 0, ACCURACITY)) {
                 if (b == 0){
                     *x1 = 0;
                 }
